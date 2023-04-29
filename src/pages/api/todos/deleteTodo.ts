@@ -1,18 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
 import {prisma} from "@/db/prisma";
 
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
-    const response = await prisma.todo.findMany({
+    const response = await prisma.todo.delete({
       where: {
-        userId: session.user.id,
-      },
-      include: {
-        User: true,
+        id: req.body.id,
       },
     });
     res.status(200).json(response);
