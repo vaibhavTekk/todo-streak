@@ -23,10 +23,23 @@ export default function TodoList() {
   }
 
   return (
-    <ul ref={parent}>
-      {data.map((e: any) => {
-        return <TodoItem todo={e} key={e.id}></TodoItem>;
-      })}
-    </ul>
+    <div>
+      <div>Pending</div>
+      <ul ref={parent}>
+        {data
+          .filter((e: any) => !e.completed)
+          .map((e: any) => {
+            return <TodoItem todo={e} key={e.id}></TodoItem>;
+          })}
+      </ul>
+      <div>Completed</div>
+      <ul ref={parent}>
+        {data
+          .filter((e: any) => e.completed)
+          .map((e: any) => {
+            return <TodoItem todo={e} key={e.id}></TodoItem>;
+          })}
+      </ul>
+    </div>
   );
 }
