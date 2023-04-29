@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
 
-function submit(): void {
-  fetch("/api/todos/create", { method: "GET", body: "Hello" }).then();
-}
+export default function Form() {
+  const { data: session } = useSession();
+  const [title, setTitle] = useState("");
 
-export default function CreateTodo() {
+  const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const submit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const response = await fetch(`/api/todos/create/`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+      }),
+    });
+
+    console.log(response);
+  };
   return (
     <>
-      <form>
-        <input type="text" />
-        <button onClick={submit()}></button>
+      <form className="form-control">
+        <input className="input" type="text" name="title" onChange={changeTitle} />
+        <button className="btn btn-primary" onClick={submit}>
+          Submit
+        </button>
       </form>
     </>
   );

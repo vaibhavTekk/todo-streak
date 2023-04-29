@@ -6,7 +6,6 @@ export default function LoginBtn() {
     return (
       <>
         Signed in as {session.user?.email} <br />
-        {console.log(session.user)}
         <button onClick={() => signOut()}>Sign out</button>
       </>
     );
