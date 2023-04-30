@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Trash2 } from "react-feather";
-import { QueryClient, useMutation, useQueries, useQueryClient } from "react-query";
-import { setConstantValue } from "typescript";
+import { useMutation, useQueryClient } from "react-query";
+import { Button, Checkbox } from "flowbite-react";
 
 export default function TodoItem(props: any) {
   const id = props.todo.id;
@@ -56,19 +56,12 @@ export default function TodoItem(props: any) {
 
   return (
     <li>
-      <div className="flex flex-row p-8 items-center h-12 gap-2">
-        <input
-          type="checkbox"
-          className="checkbox"
-          name="checkbox"
-          id=""
-          onChange={(e) => handleCheck(e)}
-          defaultChecked={checked}
-        />
+      <div className="flex flex-row p-4 items-center h-16 gap-2">
+        <Checkbox name="checkbox" id="checkbox" onChange={(e) => handleCheck(e)} defaultChecked={checked}></Checkbox>
         {checked ? <span className="line-through">{props.todo.title}</span> : <span>{props.todo.title}</span>}
-        <button className="btn btn-square btn-ghost btn-sm" onClick={() => deleteMutation.mutate()}>
-          <Trash2 className="h-1/2" />
-        </button>
+        <Button className="p-1" size="xs" color="gray" onClick={() => deleteMutation.mutate()}>
+          <Trash2 className="h-[16px] w-[16px]"></Trash2>
+        </Button>
       </div>
     </li>
   );

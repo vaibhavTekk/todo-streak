@@ -1,0 +1,36 @@
+import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
+import { useSession, signIn, signOut } from "next-auth/react";
+
+export default function PageNavbar() {
+  const { data: session } = useSession();
+  if (session) {
+    console.log(session);
+  }
+  return (
+    <Navbar fluid={true} rounded={true} >
+      <Navbar.Brand href="http://localhost:3000">
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Todo-Streak</span>
+      </Navbar.Brand>
+      {session ? (
+        <div className="flex md:order-2">
+          <Dropdown
+            arrowIcon={false}
+            inline={true}
+            label={<Avatar alt="User settings" img={session.user?.image} rounded={true} />}
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">{session.user?.name}</span>
+              <span className="block truncate text-sm font-medium">{session.user?.email}</span>
+            </Dropdown.Header>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={() => signOut()}>Sign Out</Dropdown.Item>
+          </Dropdown>
+          <Navbar.Toggle />
+        </div>
+      ) : (
+        <Button onClick={() => signIn()}>Sign In</Button>
+      )}
+    </Navbar>
+  );
+}

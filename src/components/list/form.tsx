@@ -1,6 +1,6 @@
-import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { QueryClient, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
+import { Label, TextInput, Button } from "flowbite-react";
 
 export default function Form() {
   const [title, setTitle] = useState("");
@@ -33,9 +33,14 @@ export default function Form() {
   });
   return (
     <>
-      <form className="form-control" onSubmit={submit}>
-        <input className="input" type="text" name="title" onChange={changeTitle} value={title} />
-        <input type="submit" value="Submit" className="btn btn-primary" />
+      <form className="flex flex-col gap-4 p-4" onSubmit={submit}>
+        <div className="mb-2 block">
+          <Label htmlFor="title" value="New Todo" />
+        </div>
+        <TextInput id="title" type="text" name="title" required={true} onChange={changeTitle} value={title} />
+        <Button type="submit" value="Submit" className="btn btn-primary">
+          Submit
+        </Button>
       </form>
     </>
   );
