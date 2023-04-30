@@ -34,7 +34,7 @@ export default function Form() {
   return (
     <>
       <form className="flex flex-col gap-4 p-4" onSubmit={submit}>
-        <div className="mb-2 block">
+        <div className="block">
           <Label htmlFor="title" value="New Todo" />
         </div>
         <TextInput id="title" type="text" name="title" required={true} onChange={changeTitle} value={title} />

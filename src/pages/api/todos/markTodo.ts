@@ -1,6 +1,7 @@
+/* eslint-disable import/no-anonymous-default-export */
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/db/prisma";
-
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
