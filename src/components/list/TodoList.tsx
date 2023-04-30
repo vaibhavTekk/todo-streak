@@ -10,7 +10,7 @@ export default function TodoList() {
     return data;
   };
 
-  const { isLoading, isError, data, error } = useQuery("todos", getTodos);
+  const { isLoading, isError, data, error, isFetching } = useQuery("todos", getTodos);
 
   const parent = useRef(null);
   useEffect(() => {
@@ -45,6 +45,12 @@ export default function TodoList() {
             return <TodoItem todo={e} key={e.id}></TodoItem>;
           })}
       </ul>
+
+      {isFetching && (
+        <div className="text-center">
+          <Spinner size="xl"></Spinner>
+        </div>
+      )}
     </div>
   );
 }

@@ -3,8 +3,9 @@ import { signIn } from "next-auth/react";
 
 export default function Landing() {
   return (
-    <main className="flex flex-col m-auto w-1/2 justify-center items-center h-full">
-      <span className="text-6xl">Welcome to TodoStreak 👋</span>
+    <main className="flex flex-col m-auto w-1/2 gap-8 justify-center items-center h-full">
+      <div className="text-4xl font-semibold">Welcome to TodoStreak 👋</div>
+      <div className="text-3xl ">A TodoList app with a Social Twist</div>
       <Button size="xl" onClick={() => signIn()}>
         Sign In
       </Button>

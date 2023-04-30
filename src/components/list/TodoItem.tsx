@@ -56,10 +56,12 @@ export default function TodoItem(props: any) {
 
   return (
     <li>
-      <div className="flex flex-row p-4 items-center h-16 gap-2">
-        <Checkbox name="checkbox" id="checkbox" onChange={(e) => handleCheck(e)} defaultChecked={checked}></Checkbox>
-        {checked ? <span className="line-through">{props.todo.title}</span> : <span>{props.todo.title}</span>}
-        <Button className="p-1" size="xs" color="gray" onClick={() => deleteMutation.mutate()}>
+      <div className="flex flex-row p-4 items-center justify-between h-16 gap-4">
+        <div className="flex flex-row gap-4 items-center">
+          <Checkbox name="checkbox" id="checkbox" onChange={(e) => handleCheck(e)} defaultChecked={checked}></Checkbox>
+          {checked ? <span className="line-through">{props.todo.title}</span> : <span>{props.todo.title}</span>}
+        </div>
+        <Button className="p-1 justify-self-end" size="xs" color="gray" onClick={() => deleteMutation.mutate()}>
           <Trash2 className="h-[16px] w-[16px]"></Trash2>
         </Button>
       </div>
