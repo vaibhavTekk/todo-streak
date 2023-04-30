@@ -40,6 +40,7 @@ export default function TodoItem(props: any) {
   const deleteMutation = useMutation(deleteTodo, {
     onSuccess: () => {
       newqueryclient.invalidateQueries("todos");
+      newqueryclient.invalidateQueries("streaks");
     },
   });
 
@@ -47,6 +48,7 @@ export default function TodoItem(props: any) {
     onSuccess: (res) => {
       setChecked(res.completed);
       newqueryclient.invalidateQueries("todos");
+      newqueryclient.invalidateQueries("streaks");
     },
   });
 

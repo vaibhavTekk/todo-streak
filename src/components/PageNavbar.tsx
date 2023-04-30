@@ -3,11 +3,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function PageNavbar() {
   const { data: session } = useSession();
-  if (session) {
-    console.log(session);
-  }
+
   return (
-    <Navbar fluid={true} rounded={true} >
+    <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="http://localhost:3000">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Todo-Streak</span>
       </Navbar.Brand>

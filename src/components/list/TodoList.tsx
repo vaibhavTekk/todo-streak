@@ -1,7 +1,5 @@
 import { useQuery } from "react-query";
 import TodoItem from "./TodoItem";
-import autoAnimate from "@formkit/auto-animate";
-import { useRef, useEffect } from "react";
 import { Spinner } from "flowbite-react";
 
 export default function TodoList() {
@@ -11,11 +9,6 @@ export default function TodoList() {
   };
 
   const { isLoading, isError, data, error, isFetching } = useQuery("todos", getTodos);
-
-  const parent = useRef(null);
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current);
-  }, [parent]);
 
   if (isLoading) {
     return (
@@ -30,7 +23,7 @@ export default function TodoList() {
   return (
     <div>
       <div>Pending</div>
-      <ul ref={parent}>
+      <ul>
         {data
           .filter((e: any) => !e.completed)
           .map((e: any) => {

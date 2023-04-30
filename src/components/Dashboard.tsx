@@ -1,5 +1,6 @@
 import TodoList from "./list/TodoList";
 import Form from "./list/form";
+import Streaks from "./stats/Streaks";
 export default function Dashboard() {
   return (
     <div className="h-full p-8">
@@ -8,7 +9,9 @@ export default function Dashboard() {
           <TodoList></TodoList>
           <Form></Form>
         </div>
-        <div className="flex-[70%]"></div>
+        <div className="flex-[70%]">
+          <Streaks></Streaks>
+        </div>
       </div>
     </div>
   );

@@ -62,6 +62,7 @@ model Todo {
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   deadline  DateTime @default(now()) @db.Timestamptz(6)
   completed Boolean  @default(false)
+  dateCompleted DateTime? @db.Timestamptz(6)
   User      User?    @relation(fields: [userId], references: [id])
   userId    String?
 }

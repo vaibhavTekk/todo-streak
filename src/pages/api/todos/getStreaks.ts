@@ -7,18 +7,16 @@ import { authOptions } from "../auth/[...nextauth]";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
-  let date: Date | null = new Date();
-  if (req.body.checked === true) {
-    date = null;
-  }
   if (session) {
-    const response = await prisma.todo.update({
+    const response = await prisma.todo.findMany({
       where: {
-        id: req.body.id,
+        userId: session.user.id,
+        NOT: {
+          dateCompleted: null,
+        },
       },
-      data: {
-        completed: !req.body.checked,
-        dateCompleted: date,
+      select: {
+        dateCompleted: true,
       },
     });
     res.status(200).json(response);
