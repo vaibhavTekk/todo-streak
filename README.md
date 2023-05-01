@@ -18,5 +18,5 @@ Built with the Following Technologies
 Backlog:
 
 - [x] TodoList
-- [-] Streaks Calculation
+- [ ] Streaks Calculation
 - [ ] Friends Feature
