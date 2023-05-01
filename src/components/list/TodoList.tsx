@@ -23,7 +23,7 @@ export default function TodoList() {
   return (
     <div>
       <div>Pending</div>
-      <ul>
+      <ul className="flex flex-col gap-1">
         {data
           .filter((e: any) => !e.completed)
           .map((e: any) => {

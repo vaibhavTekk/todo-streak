@@ -58,7 +58,7 @@ export default function TodoItem(props: any) {
 
   return (
     <li>
-      <div className="flex flex-row p-4 items-center justify-between h-16 gap-4">
+      <div className="flex flex-row p-1 items-center justify-between rounded-lg border-gray-600 border-2 border-opacity-10">
         <div className="flex flex-row gap-4 items-center">
           <Checkbox name="checkbox" id="checkbox" onChange={(e) => handleCheck(e)} defaultChecked={checked}></Checkbox>
           {checked ? <span className="line-through">{props.todo.title}</span> : <span>{props.todo.title}</span>}

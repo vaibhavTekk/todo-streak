@@ -19,11 +19,14 @@ export default function Streaks() {
       })
       .sort()
       .reverse()
-      .forEach((el: number, i: any) => {
+      .every((el: number, i: any) => {
         let date: number = el;
         let today: number = new Date().setUTCHours(0, 0, 0, 0);
         if (today - i * dayDuration === date) {
+          console.log(date);
           count += 1;
+        } else {
+          return;
         }
       });
     return count;

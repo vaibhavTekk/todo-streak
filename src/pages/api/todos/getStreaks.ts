@@ -11,6 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const response = await prisma.todo.findMany({
       where: {
         userId: session.user.id,
+        completed: true,
         NOT: {
           dateCompleted: null,
         },
