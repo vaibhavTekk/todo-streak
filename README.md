@@ -16,6 +16,7 @@ Built with the Following Technologies
 - TailwindCSS with Flowbite Components
 
 Backlog:
-[x] - TodoList
-[-] - Streaks Calculation
-[ ] - Friends Feature
+
+- [x] TodoList
+- [-] Streaks Calculation
+- [ ] Friends Feature
