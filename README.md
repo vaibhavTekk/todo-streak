@@ -14,3 +14,8 @@ Built with the Following Technologies
 - NextAuth.js for Auth
 - ReactQuery for Client-side data fetching
 - TailwindCSS with Flowbite Components
+
+Backlog:
+[x] - TodoList
+[-] - Streaks Calculation
+[ ] - Friends Feature
