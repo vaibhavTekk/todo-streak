@@ -1,17 +1,30 @@
-/* eslint-disable import/no-anonymous-default-export */
+// const exampledates = [
+//   { dateCompleted: "2023-05-06T07:08:06.655Z" },
+//   { dateCompleted: "2023-05-03T07:08:06.655Z" },
+//   { dateCompleted: "2023-05-02T07:22:35.487Z" },
+//   { dateCompleted: "2023-05-01T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-04T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-30T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-27T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-28T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-08T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-16T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-15T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-14T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-23T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-19T07:31:56.287Z" },
+//   { dateCompleted: "2023-04-03T07:08:06.655Z" },
+//   { dateCompleted: "2023-04-02T07:22:35.487Z" },
+//   { dateCompleted: "2023-04-01T07:31:56.287Z" },
+// ];
 
-import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "@/db/prisma";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
-
-const calculateStreak = (dateList: any) => {
-  let currentStreak: number | undefined = 0;
-  let maxStreak: number = 0;
-  let prevStreak: number | undefined = 0;
+const calculateStreak = (dateList) => {
+  let currentStreak = 0;
+  let maxStreak = 0;
+  let prevStreak = 0;
   let today = new Date().setUTCHours(0, 0, 0, 0);
   dateList = dateList
-    .map((e: any) => {
+    .map((e) => {
       const d = new Date(e.dateCompleted).setUTCHours(0, 0, 0, 0);
       return d;
     })
@@ -61,27 +74,5 @@ const calculateStreak = (dateList: any) => {
   return { currentStreak, maxStreak, prevStreak };
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getServerSession(req, res, authOptions);
-  if (session) {
-    const response = await prisma.todo.findMany({
-      where: {
-        userId: session.user.id,
-        completed: true,
-        NOT: {
-          dateCompleted: null,
-        },
-      },
-      distinct: ["dateCompleted"],
-      select: {
-        dateCompleted: true,
-      },
-    });
-    const { currentStreak, maxStreak, prevStreak } = calculateStreak(response);
-    res.status(200).json({ currentStreak, maxStreak, prevStreak });
-  } else {
-    res.status(400).send({
-      error: "You must be signed in to view the protected content on this page.",
-    });
-  }
-};
+const { currentStreak, maxStreak, prevStreak } = calculateStreak(exampledates);
+console.log(currentStreak, maxStreak, prevStreak);
