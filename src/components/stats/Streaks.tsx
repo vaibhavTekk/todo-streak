@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { Spinner } from "flowbite-react";
-import { useEffect, useState } from "react";
 
 export default function Streaks() {
   const getStreaks = async () => {

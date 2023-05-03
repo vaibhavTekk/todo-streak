@@ -5,6 +5,10 @@ import { prisma } from "@/db/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
+const removeDuplicates = (arr: any) => {
+  const set = new Set(arr);
+  return [...set];
+};
 const calculateStreak = (dateList: any) => {
   let currentStreak: number | undefined = 0;
   let maxStreak: number = 0;
@@ -16,7 +20,8 @@ const calculateStreak = (dateList: any) => {
       return d;
     })
     .sort();
-  //console.log(dateList.map((e) => new Date(e)));
+  dateList = removeDuplicates(dateList);
+  // console.log(dateList.map((e: number) => new Date(e)));
   let arr = [];
   for (let i = 1; i < dateList.length; i++) {
     arr.push((dateList[i] - dateList[i - 1]) / 86400000);
@@ -72,12 +77,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           dateCompleted: null,
         },
       },
-      distinct: ["dateCompleted"],
       select: {
         dateCompleted: true,
       },
     });
     const { currentStreak, maxStreak, prevStreak } = calculateStreak(response);
+    // console.log(response);
+    // console.log(currentStreak, maxStreak, prevStreak);
     res.status(200).json({ currentStreak, maxStreak, prevStreak });
   } else {
     res.status(400).send({

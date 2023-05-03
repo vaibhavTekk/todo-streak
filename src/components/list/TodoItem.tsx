@@ -41,6 +41,7 @@ export default function TodoItem(props: any) {
     onSuccess: () => {
       newqueryclient.invalidateQueries("todos");
       newqueryclient.invalidateQueries("streaks");
+      newqueryclient.invalidateQueries("dates");
     },
   });
 
@@ -49,6 +50,7 @@ export default function TodoItem(props: any) {
       setChecked(res.completed);
       newqueryclient.invalidateQueries("todos");
       newqueryclient.invalidateQueries("streaks");
+      newqueryclient.invalidateQueries("dates");
     },
   });
 

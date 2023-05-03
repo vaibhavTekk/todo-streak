@@ -1,6 +1,8 @@
 import TodoList from "./list/TodoList";
 import Form from "./list/form";
 import Streaks from "./stats/Streaks";
+import Heatmap from "./stats/Heatmap";
+
 export default function Dashboard() {
   return (
     <div className="h-full p-8">
@@ -11,6 +13,7 @@ export default function Dashboard() {
         </div>
         <div className="flex-[70%]">
           <Streaks></Streaks>
+          <Heatmap></Heatmap>
         </div>
       </div>
     </div>
