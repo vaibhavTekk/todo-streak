@@ -23,7 +23,7 @@ export default function TodoList() {
   return (
     <div>
       <div>Pending</div>
-      <ul className="flex flex-col gap-1">
+      <ul className="flex flex-col gap-2">
         {data
           .filter((e: any) => !e.completed)
           .map((e: any) => {
@@ -31,7 +31,7 @@ export default function TodoList() {
           })}
       </ul>
       <div>Completed</div>
-      <ul>
+      <ul className="flex flex-col gap-2">
         {data
           .filter((e: any) => e.completed)
           .map((e: any) => {
@@ -40,7 +40,7 @@ export default function TodoList() {
       </ul>
 
       {isFetching && (
-        <div className="text-center">
+        <div className="text-center m-8">
           <Spinner size="xl"></Spinner>
         </div>
       )}
