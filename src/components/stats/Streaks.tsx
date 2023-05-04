@@ -19,10 +19,22 @@ export default function Streaks() {
   }
 
   return (
-    <div>
-      <div>Current Streak: {data.currentStreak}</div>
-      <div>Max Streak: {data.maxStreak}</div>
-      <div>Previous Streak: {data.prevStreak}</div>
+    <div className=" flex flex-col p-2 border-[2px] rounded-lg shadow-sm">
+      <span className="p-2 pb-0 font-semibold text-xl">Streaks</span>
+      <div className="grid grid-cols-3 grid-rows-1 h-48 gap-2  ">
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-2xl font-semibold mb-2">Current Streak</span>
+          <span className="text-4xl font-bold">{data.currentStreak}</span>
+        </div>
+        <div className="flex flex-col items-center justify-center border-l-[2px] border-r-[2px]">
+          <span className="text-2xl font-semibold mb-2">Max Streak</span>
+          <span className="text-4xl font-bold">{data.maxStreak}</span>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-2xl font-semibold mb-2">Previous Streak</span>
+          <span className="text-4xl font-bold">{data.prevStreak}</span>
+        </div>
+      </div>
 
       {isFetching && (
         <div className="text-center">

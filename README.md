@@ -22,3 +22,4 @@ Backlog:
 - [x] TodoList
 - [x] Streaks Calculation
 - [ ] Friends Feature
+- [ ] Group

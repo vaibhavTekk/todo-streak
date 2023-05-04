@@ -22,23 +22,26 @@ export default function TodoList() {
 
   return (
     <div>
-      <div>Pending</div>
-      <ul className="flex flex-col gap-2">
-        {data
-          .filter((e: any) => !e.completed)
-          .map((e: any) => {
-            return <TodoItem todo={e} key={e.id}></TodoItem>;
-          })}
-      </ul>
-      <div>Completed</div>
-      <ul className="flex flex-col gap-2">
-        {data
-          .filter((e: any) => e.completed)
-          .map((e: any) => {
-            return <TodoItem todo={e} key={e.id}></TodoItem>;
-          })}
-      </ul>
-
+      {data && (
+        <>
+          <div className="mb-1 p-2">Pending</div>
+          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-64">
+            {data
+              .filter((e: any) => !e.completed)
+              .map((e: any) => {
+                return <TodoItem todo={e} key={e.id}></TodoItem>;
+              })}
+          </ul>
+          <div className="mb-1 p-2">Completed</div>
+          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-64">
+            {data
+              .filter((e: any) => e.completed)
+              .map((e: any) => {
+                return <TodoItem todo={e} key={e.id}></TodoItem>;
+              })}
+          </ul>
+        </>
+      )}
       {isFetching && (
         <div className="text-center m-8">
           <Spinner size="xl"></Spinner>

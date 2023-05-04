@@ -46,11 +46,14 @@ export default function Heatmap() {
   return (
     <div>
       {data && (
-        <CalendarHeatmap
-          startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
-          endDate={new Date()}
-          values={data}
-        ></CalendarHeatmap>
+        <div className="flex flex-col p-2 border-[2px] shadow-sm rounded-lg my-4">
+          <span className="p-2 font-semibold text-xl">Heatmap</span>
+          <CalendarHeatmap
+            startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
+            endDate={new Date()}
+            values={data}
+          ></CalendarHeatmap>
+        </div>
       )}
 
       {isFetching && (
