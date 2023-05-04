@@ -52,6 +52,12 @@ export default function Heatmap() {
             startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
             endDate={new Date()}
             values={data}
+            classForValue={(value) => {
+              if (!value) {
+                return "color-empty";
+              }
+              return `color-scale-${value.count}`;
+            }}
           ></CalendarHeatmap>
         </div>
       )}

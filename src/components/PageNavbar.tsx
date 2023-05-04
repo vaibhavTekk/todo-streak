@@ -20,14 +20,16 @@ export default function PageNavbar() {
               <span className="block text-sm">{session.user?.name}</span>
               <span className="block truncate text-sm font-medium">{session.user?.email}</span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>
+              <a href="/dashboard">Dashboard</a>
+            </Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={() => signOut()}>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Dropdown.Item>
           </Dropdown>
           <Navbar.Toggle />
         </div>
       ) : (
-        <Button onClick={() => signIn()}>Sign In</Button>
+        <Button onClick={() => signIn(undefined, { callbackUrl: "/dashboard" })}>Sign In</Button>
       )}
     </Navbar>
   );

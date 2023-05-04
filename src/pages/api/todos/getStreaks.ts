@@ -32,15 +32,21 @@ const calculateStreak = (dateList: any) => {
   let i = 0;
   let j = 1;
   while (j < arr.length) {
-    if (arr[i] == arr[j]) {
+    if (arr.length == 1) {
       if (arr[i] == 1) {
         streak += 1;
       }
     } else {
-      if (arr[i] == 1) {
-        streak += 1;
-        streaks.push(streak + 1);
-        streak = 0;
+      if (arr[i] == arr[j]) {
+        if (arr[i] == 1) {
+          streak += 1;
+        }
+      } else {
+        if (arr[i] == 1) {
+          streak += 1;
+          streaks.push(streak + 1);
+          streak = 0;
+        }
       }
     }
     if (j == arr.length - 1) {
@@ -52,7 +58,7 @@ const calculateStreak = (dateList: any) => {
     i++;
     j++;
   }
-  //console.log(streaks);
+  console.log(streaks, arr);
   if (streaks.length > 0) {
     if (dateList.at(-1) == today && arr.at(-1) == 1) {
       currentStreak = streaks.at(-1);

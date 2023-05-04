@@ -21,11 +21,11 @@ export default function TodoList() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col border-[2px] rounded-lg shadow-sm p-2">
       {data && (
         <>
           <div className="mb-1 p-2">Pending</div>
-          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-64">
+          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-56">
             {data
               .filter((e: any) => !e.completed)
               .map((e: any) => {
@@ -33,7 +33,7 @@ export default function TodoList() {
               })}
           </ul>
           <div className="mb-1 p-2">Completed</div>
-          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-64">
+          <ul className="flex flex-col gap-2 overflow-y-scroll max-h-56">
             {data
               .filter((e: any) => e.completed)
               .map((e: any) => {
