@@ -2,9 +2,12 @@
 
 - A Todo List app with a social twist.
 - Maintain your daily streak by adding and completing tasks everyday
+- See Progress Visually
+
+Upcoming:
+
 - Add friends and compete with them
 - Embark on Challenges
-- See Progress Visually
 
 Built with the Following Technologies
 
@@ -21,5 +24,11 @@ Backlog:
 
 - [x] TodoList
 - [x] Streaks Calculation
+- [ ] Group Tasks
+- [ ] Filter Dashboard Tasks list
+
+Social :
+
 - [ ] Friends Feature
-- [ ] Group
+- [ ] Scoring System
+- [ ] Leaderboard

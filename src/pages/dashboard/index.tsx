@@ -22,7 +22,7 @@ export default function Dashboard() {
           </div>
         </div>
       ) : (
-        <div>Unauthorized  </div>
+        <div>Unauthorized.. Please Log in</div>
       )}
     </>
   );

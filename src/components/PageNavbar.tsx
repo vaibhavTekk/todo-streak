@@ -1,5 +1,6 @@
 import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function PageNavbar() {
   const { data: session } = useSession();
@@ -10,6 +11,7 @@ export default function PageNavbar() {
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Todo-Streak</span>
       </Navbar.Brand>
       {session ? (
+        
         <div className="flex md:order-2">
           <Dropdown
             arrowIcon={false}
@@ -21,7 +23,7 @@ export default function PageNavbar() {
               <span className="block truncate text-sm font-medium">{session.user?.email}</span>
             </Dropdown.Header>
             <Dropdown.Item>
-              <a href="/dashboard">Dashboard</a>
+              <Link href="/dashboard">Dashboard</Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={() => signOut({ callbackUrl: "/" })}>Sign Out</Dropdown.Item>
