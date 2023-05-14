@@ -4,12 +4,15 @@ import Streaks from "@/components/stats/Streaks";
 import Heatmap from "@/components/stats/Heatmap";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Dashboard() {
+  const router = useRouter();
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
       toast.error("Unauthenticated");
+      router.push("/");
     },
   });
 

@@ -4,12 +4,7 @@ import Link from "next/link";
 import { toast } from "react-hot-toast";
 
 export default function PageNavbar() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      toast.error("Unauthenticated");
-    },
-  });
+  const { data: session } = useSession();
 
   return (
     <Navbar fluid={true} rounded={true}>
