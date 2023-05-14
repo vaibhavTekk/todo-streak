@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { Label, TextInput, Button } from "flowbite-react";
+import { useMutation, useQueryClient, useQuery } from "react-query";
+import { Label, TextInput, Button, Select } from "flowbite-react";
+import { toast } from "react-hot-toast";
 
 export default function Form() {
   const [title, setTitle] = useState("");
@@ -29,7 +30,12 @@ export default function Form() {
   };
 
   const mutation = useMutation(postTodo, {
-    onSuccess: () => newqueryclient.invalidateQueries("todos"),
+    onSuccess: () => {
+      newqueryclient.invalidateQueries("todos");
+    },
+    onError: () => {
+      toast.error("Error Creating Todos");
+    },
   });
   return (
     <>
@@ -38,6 +44,17 @@ export default function Form() {
           <Label htmlFor="title" value="New Todo" />
         </div>
         <TextInput id="title" type="text" name="title" required={true} onChange={changeTitle} value={title} />
+        <div id="select">
+          <div className="mb-2 block">
+            <Label htmlFor="groups" value="Select group" />
+          </div>
+          <Select id="groups" required={true}>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>France</option>
+            <option>Germany</option>
+          </Select>
+        </div>
         <Button type="submit" value="Submit" className="btn btn-primary">
           Submit
         </Button>

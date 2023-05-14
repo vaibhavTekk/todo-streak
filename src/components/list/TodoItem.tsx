@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Trash2 } from "react-feather";
 import { useMutation, useQueryClient } from "react-query";
 import { Button, Checkbox } from "flowbite-react";
+import { toast } from "react-hot-toast";
 
 export default function TodoItem(props: any) {
   const id = props.todo.id;
@@ -43,6 +44,9 @@ export default function TodoItem(props: any) {
       newqueryclient.invalidateQueries("streaks");
       newqueryclient.invalidateQueries("dates");
     },
+    onError: () => {
+      toast.error("Error Deleting Todo");
+    },
   });
 
   const checkMutation = useMutation(markTodo, {
@@ -51,6 +55,9 @@ export default function TodoItem(props: any) {
       newqueryclient.invalidateQueries("todos");
       newqueryclient.invalidateQueries("streaks");
       newqueryclient.invalidateQueries("dates");
+    },
+    onError: () => {
+      toast.error("Error marking Todo");
     },
   });
 

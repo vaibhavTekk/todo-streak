@@ -3,9 +3,16 @@ import Form from "@/components/list/form";
 import Streaks from "@/components/stats/Streaks";
 import Heatmap from "@/components/stats/Heatmap";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 export default function Dashboard() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      toast.error("Unauthenticated");
+    },
+  });
+
   return (
     <>
       {session ? (

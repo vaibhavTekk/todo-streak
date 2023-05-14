@@ -1,9 +1,15 @@
 import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 
 export default function PageNavbar() {
-  const { data: session } = useSession();
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      toast.error("Unauthenticated");
+    },
+  });
 
   return (
     <Navbar fluid={true} rounded={true}>
@@ -11,7 +17,6 @@ export default function PageNavbar() {
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Todo-Streak</span>
       </Navbar.Brand>
       {session ? (
-        
         <div className="flex md:order-2">
           <Dropdown
             arrowIcon={false}
@@ -31,7 +36,13 @@ export default function PageNavbar() {
           <Navbar.Toggle />
         </div>
       ) : (
-        <Button onClick={() => signIn(undefined, { callbackUrl: "/dashboard" })}>Sign In</Button>
+        <Button
+          onClick={() =>
+            signIn(undefined, { callbackUrl: "/dashboard" }).catch((err) => toast.error("Error Signing in!"))
+          }
+        >
+          Sign In
+        </Button>
       )}
     </Navbar>
   );

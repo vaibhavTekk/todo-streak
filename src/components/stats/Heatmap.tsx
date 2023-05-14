@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { Spinner } from "flowbite-react";
 import "react-calendar-heatmap/dist/styles.css";
+import { toast } from "react-hot-toast";
 
 import CalendarHeatmap from "react-calendar-heatmap";
 
@@ -40,6 +41,7 @@ export default function Heatmap() {
       </div>
     );
   } else if (isError) {
+    toast.error("Error fetching streaks");
     return <div>Error....</div>;
   }
 

@@ -58,7 +58,7 @@ const calculateStreak = (dateList: any) => {
     i++;
     j++;
   }
-  console.log(streaks, arr);
+  //console.log(streaks, arr);
   if (streaks.length > 0) {
     if (dateList.at(-1) == today && arr.at(-1) == 1) {
       currentStreak = streaks.at(-1);
@@ -75,22 +75,35 @@ const calculateStreak = (dateList: any) => {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
-    const response = await prisma.todo.findMany({
-      where: {
-        userId: session.user.id,
-        completed: true,
-        NOT: {
-          dateCompleted: null,
+    const streaks = await prisma.todo
+      .findMany({
+        where: {
+          userId: session.user.id,
+          completed: true,
+          NOT: {
+            dateCompleted: null,
+          },
         },
-      },
-      select: {
-        dateCompleted: true,
-      },
-    });
-    const { currentStreak, maxStreak, prevStreak } = calculateStreak(response);
+        select: {
+          dateCompleted: true,
+        },
+      })
+      .catch((err) => res.status(400).send({ error: "Error connecting to database" }));
+    const { currentStreak, maxStreak, prevStreak } = calculateStreak(streaks);
+    const score = await prisma.user
+      .findUnique({
+        where: {
+          id: session.user.id,
+        },
+        select: {
+          score: true,
+        },
+      })
+      .catch((err) => res.status(400).send({ error: "Error connecting to database" }));
+    res.status(200).json({ currentStreak, maxStreak, prevStreak, ...score });
+
     // console.log(response);
     // console.log(currentStreak, maxStreak, prevStreak);
-    res.status(200).json({ currentStreak, maxStreak, prevStreak });
   } else {
     res.status(400).send({
       error: "You must be signed in to view the protected content on this page.",

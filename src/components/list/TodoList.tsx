@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import TodoItem from "./TodoItem";
 import { Spinner } from "flowbite-react";
+import { toast } from "react-hot-toast";
 
 export default function TodoList() {
   const getTodos = async () => {
@@ -17,6 +18,7 @@ export default function TodoList() {
       </div>
     );
   } else if (isError) {
+    toast.error("Error Loading Todos");
     return <div>Error....</div>;
   }
 

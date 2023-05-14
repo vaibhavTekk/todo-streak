@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { Spinner } from "flowbite-react";
+import { toast } from "react-hot-toast";
 
 export default function Streaks() {
   const getStreaks = async () => {
@@ -15,11 +16,16 @@ export default function Streaks() {
       </div>
     );
   } else if (isError) {
+    toast.error("Error fetching streaks");
     return <div>Error....</div>;
   }
 
   return (
     <div className=" flex flex-col p-2 border-[2px] rounded-lg shadow-sm">
+      <div className="flex flex-row">
+        <span>Score</span>
+        <span>{data.score}</span>
+      </div>
       <span className="p-2 pb-0 font-semibold text-xl">Streaks</span>
       <div className="grid grid-cols-3 grid-rows-1 h-48 gap-2  ">
         <div className="flex flex-col items-center justify-center">
