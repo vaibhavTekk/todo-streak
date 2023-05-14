@@ -48,7 +48,10 @@ model User {
   todos         Todo[]
   groups        Group[]
   friendships   Friendship[]
-  score         Int          @default(0)
+  score         Int @default(0)
+  currentStreak Int @default(0)
+  maxStreak     Int @default(0)
+  prevStreak    Int @default(0)
 }
 
 model VerificationToken {

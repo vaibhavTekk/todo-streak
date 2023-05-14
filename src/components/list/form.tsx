@@ -32,6 +32,10 @@ export default function Form() {
   const mutation = useMutation(postTodo, {
     onSuccess: () => {
       newqueryclient.invalidateQueries("todos");
+      newqueryclient.invalidateQueries("streaks");
+      toast("Created new todo ! +5 XP", {
+        icon: "✍️",
+      });
     },
     onError: () => {
       toast.error("Error Creating Todos");

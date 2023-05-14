@@ -40,6 +40,9 @@ export default function TodoItem(props: any) {
 
   const deleteMutation = useMutation(deleteTodo, {
     onSuccess: () => {
+      toast("Deleted todo !", {
+        icon: "🗑️",
+      });
       newqueryclient.invalidateQueries("todos");
       newqueryclient.invalidateQueries("streaks");
       newqueryclient.invalidateQueries("dates");
@@ -52,6 +55,9 @@ export default function TodoItem(props: any) {
   const checkMutation = useMutation(markTodo, {
     onSuccess: (res) => {
       setChecked(res.completed);
+      toast("Marked as Done ! + 10XP", {
+        icon: "✅",
+      });
       newqueryclient.invalidateQueries("todos");
       newqueryclient.invalidateQueries("streaks");
       newqueryclient.invalidateQueries("dates");

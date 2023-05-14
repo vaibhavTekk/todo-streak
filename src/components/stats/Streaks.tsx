@@ -19,7 +19,6 @@ export default function Streaks() {
     toast.error("Error fetching streaks");
     return <div>Error....</div>;
   }
-
   return (
     <div className=" flex flex-col p-2 border-[2px] rounded-lg shadow-sm">
       <div className="flex flex-row">
