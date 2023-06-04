@@ -26,9 +26,13 @@ Backlog:
 - [x] Streaks Calculation
 - [ ] Group Tasks
 - [ ] Filter Dashboard Tasks list
+- [ ] Task Deadlines
+- [ ] Pomodoro Timer
 
 Social :
 
-- [ ] Friends Feature
+- [x] Friends Feature
+- [ ] Individual User Page
 - [ ] Scoring System
 - [ ] Leaderboard
+- [ ] Compare Scores
