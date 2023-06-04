@@ -10,21 +10,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (session) {
     await prisma.user
       .findUnique({
+        select: {
+          following: true,
+        },
         where: {
           id: session.user.id,
         },
-        select: {
-          score: true,
-          maxStreak: true,
-          currentStreak: true,
-          prevStreak: true,
-        },
       })
-      .then((stats) => {
-        //console.log(stats);
-        res.status(200).json({ ...stats });
+      .then((response) => {
+        //console.log(response);
+        res.status(200).json(response);
       })
-      .catch((err) => res.status(400).json({ error: "Error connecting to database", err }));
+      .catch((err) => {
+        //console.log(err);
+        res.status(400).send({
+          error: "Error Connecting to database",
+        });
+      });
   } else {
     res.status(400).send({
       error: "You must be signed in to view the protected content on this page.",

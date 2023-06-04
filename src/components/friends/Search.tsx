@@ -1,9 +1,11 @@
-import { TextInput, Label, Spinner } from "flowbite-react";
-import React, { useState } from "react";
+import { TextInput, Label, Spinner, Button } from "flowbite-react";
+import React, { FormEvent, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
+import UserItem from "./UserItem";
 
 export default function Search() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
+
   const getUsers = async () => {
     const data = await fetch("api/users/search", {
       method: "POST",
@@ -14,7 +16,7 @@ export default function Search() {
         searchterm: search,
       }),
     }).then((res) => res.json());
-    console.log(data);
+    //console.log(data);
     return data;
   };
 
@@ -25,22 +27,30 @@ export default function Search() {
     enabled: false,
   });
 
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setSearch(e.target.value);
     refetch();
   };
-
-  data && console.log(data);
+  //data && console.log(data);
   return (
     <>
-      <Label htmlFor="search" value="Search Users"></Label>
-      <TextInput id="search" type="text" name="search" value={search} onChange={change}></TextInput>
-      <span>{search}</span>
+      <form onSubmit={handleSubmit}>
+        <Label htmlFor="search" value="Search Users"></Label>
+        <TextInput
+          id="search"
+          type="text"
+          name="search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        ></TextInput>
+        <Button type="submit">Submit</Button>
+      </form>
       {data ? (
-        <div>
+        <div className="flex flex-col p-4">
           {data.map((e: any) => {
-            return <span key={e.id}>{e.email}</span>;
+            return <UserItem key={e.id} user={e}></UserItem>;
           })}
         </div>
       ) : (
